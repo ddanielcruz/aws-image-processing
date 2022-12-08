@@ -5,7 +5,8 @@ import hello from '@functions/hello'
 const serverlessConfiguration: AWS = {
   service: 'aws-image-processing',
   frameworkVersion: '3',
-  plugins: ['serverless-esbuild'],
+  plugins: ['serverless-esbuild', 'serverless-offline', 'serverless-prune-plugin'],
+  useDotenv: true,
   provider: {
     name: 'aws',
     runtime: 'nodejs18.x',
@@ -20,6 +21,7 @@ const serverlessConfiguration: AWS = {
   },
   package: { individually: true },
   custom: {
+    // TODO Review build setup
     esbuild: {
       bundle: true,
       minify: false,
@@ -29,6 +31,10 @@ const serverlessConfiguration: AWS = {
       define: { 'require.resolve': undefined },
       platform: 'node',
       concurrency: 10
+    },
+    prune: {
+      automatic: true,
+      number: 3
     }
   },
   functions: {
