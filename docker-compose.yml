@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  localstack:
+    image: localstack/localstack:1.0.4
+    ports:
+      - 4566:4566
+      - 4510-4559:4510-4559
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - '${LOCALSTACK_VOLUME_DIR:-./.localstack}:/var/lib/localstack'
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  postgres:
+    image: postgres:15.1-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
+    driver: local
