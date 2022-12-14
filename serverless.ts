@@ -21,7 +21,6 @@ const serverlessConfiguration: AWS = {
   },
   package: { individually: true },
   custom: {
-    // TODO Review build setup
     esbuild: {
       bundle: true,
       minify: false,
