@@ -5,18 +5,25 @@ import hello from '@functions/hello'
 const serverlessConfiguration: AWS = {
   service: 'aws-image-processing',
   frameworkVersion: '3',
-  plugins: ['serverless-esbuild', 'serverless-offline', 'serverless-prune-plugin'],
+  plugins: [
+    'serverless-esbuild',
+    'serverless-localstack',
+    'serverless-offline',
+    'serverless-prune-plugin'
+  ],
   useDotenv: true,
   provider: {
     name: 'aws',
     runtime: 'nodejs18.x',
+    stage: 'local',
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000'
+      NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
+      LOCALSTACK_HOST: process.env.LOCALSTACK_HOST || 'localhost'
     }
   },
   package: { individually: true },
@@ -34,10 +41,24 @@ const serverlessConfiguration: AWS = {
     prune: {
       automatic: true,
       number: 3
+    },
+    localstack: {
+      stages: ['local']
     }
   },
   functions: {
     hello
+  },
+  resources: {
+    Resources: {
+      Images: {
+        Type: 'AWS::S3::Bucket',
+        Properties: {
+          BucketName: '${env:BUCKET_NAME}',
+          AccessControl: 'Private'
+        }
+      }
+    }
   }
 }
 

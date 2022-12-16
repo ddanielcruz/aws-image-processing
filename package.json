@@ -4,6 +4,7 @@
   "description": "Serverless aws-nodejs-typescript template",
   "main": "serverless.ts",
   "scripts": {
+    "deploy:local": "serverless deploy --stage local --verbose",
     "start": "serverless offline --httpPort=3333 --reloadHandler --verbose",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch --coverage"
@@ -27,6 +28,7 @@
     "json-schema-to-ts": "^1.5.0",
     "serverless": "^3.0.0",
     "serverless-esbuild": "^1.23.3",
+    "serverless-localstack": "^1.0.1",
     "serverless-offline": "^12.0.1",
     "serverless-prune-plugin": "^2.0.1",
     "ts-jest": "^29.0.3",
