@@ -1,10 +1,10 @@
 import type { APIGatewayProxyEvent, APIGatewayProxyResult, Handler } from 'aws-lambda'
-import type { FromSchema } from 'json-schema-to-ts'
+import type { FromSchema, JSONSchema } from 'json-schema-to-ts'
 
-export type ValidatedAPIGatewayProxyEvent<Schema> = APIGatewayProxyEvent & FromSchema<Schema>
+type ValidatedAPIGatewayProxyEvent<S extends JSONSchema> = APIGatewayProxyEvent & FromSchema<S>
 
-export type ValidatedEventAPIGatewayProxyEvent<Schema> = Handler<
-  ValidatedAPIGatewayProxyEvent<Schema>,
+export type ValidatedEventAPIGatewayProxyEvent<S extends JSONSchema> = Handler<
+  ValidatedAPIGatewayProxyEvent<S>,
   APIGatewayProxyResult
 >
 

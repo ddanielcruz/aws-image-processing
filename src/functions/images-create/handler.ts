@@ -5,6 +5,7 @@ import { createPreSignedPut } from '@libs/s3'
 import schema from './schema'
 
 const handler: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async event => {
+  // TODO Add input validation using zod or @middy/validator
   const { filename } = event.body
   const data = await createPreSignedPut(filename)
 

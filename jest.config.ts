@@ -14,5 +14,6 @@ export default {
   testMatch: ['**/*.spec.ts'],
   roots: ['<rootDir>'],
   modulePaths: [compilerOptions.baseUrl],
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths)
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
+  setupFiles: ['dotenv/config']
 } as Config
