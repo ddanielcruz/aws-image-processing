@@ -14,7 +14,7 @@ export const createUploadUrl = async (filename: string) => {
   const command = new PutObjectCommand({
     Bucket: S3_BUCKET_NAME,
     Key: key,
-    ACL: 'public-read',
+    ACL: 'private',
     ContentType: 'image/*'
   })
 

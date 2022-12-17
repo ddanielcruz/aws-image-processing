@@ -9,7 +9,7 @@ export type ValidatedEventAPIGatewayProxyEvent<S extends JSONSchema> = Handler<
 >
 
 type Response = {
-  data?: Record<string, unknown>
+  data?: Record<string, unknown> | Record<string, unknown>[]
   statusCode?: number
 }
 
