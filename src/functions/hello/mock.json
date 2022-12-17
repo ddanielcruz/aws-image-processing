@@ -1,7 +1,0 @@
-{
-  "httpMethod": "POST",
-  "headers": {
-    "Content-Type": "application/json"
-  },
-  "body": "{\"name\": \"Daniel\"}"
-}

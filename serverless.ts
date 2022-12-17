@@ -1,6 +1,6 @@
 import type { AWS } from '@serverless/typescript'
 
-import hello from '@functions/hello'
+import * as functions from '@functions/index'
 
 const serverlessConfiguration: AWS = {
   service: 'aws-image-processing',
@@ -46,9 +46,7 @@ const serverlessConfiguration: AWS = {
       stages: ['local']
     }
   },
-  functions: {
-    hello
-  },
+  functions,
   resources: {
     Resources: {
       Images: {
