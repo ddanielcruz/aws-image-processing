@@ -10,7 +10,7 @@ interface Config {
 }
 
 export const config: Config = {
-  region: process.env.REGION || 'us-east-1'
+  region: process.env.AWS_REGION || 'us-east-1'
 }
 
 if (isOffline) {

@@ -23,7 +23,8 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
-      LOCALSTACK_HOST: process.env.LOCALSTACK_HOST || 'localhost'
+      LOCALSTACK_HOST: process.env.LOCALSTACK_HOST || 'localhost',
+      S3_BUCKET_NAME: '${env:S3_BUCKET_NAME}'
     }
   },
   package: { individually: true },
@@ -52,7 +53,7 @@ const serverlessConfiguration: AWS = {
       Images: {
         Type: 'AWS::S3::Bucket',
         Properties: {
-          BucketName: '${env:BUCKET_NAME}',
+          BucketName: '${env:S3_BUCKET_NAME}',
           AccessControl: 'Private'
         }
       }
