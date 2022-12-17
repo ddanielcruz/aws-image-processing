@@ -15,5 +15,5 @@ export default {
   roots: ['<rootDir>'],
   modulePaths: [compilerOptions.baseUrl],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
-  setupFiles: ['dotenv/config']
+  setupFiles: ['./src/tests/setup.ts']
 } as Config

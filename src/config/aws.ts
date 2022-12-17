@@ -13,6 +13,7 @@ export const config: Config = {
   region: process.env.AWS_REGION || 'us-east-1'
 }
 
+// TODO Setup GitHub action to run the tests with LocalStack
 if (isOffline) {
   const host = process.env.LOCALSTACK_HOST || 'localhost'
   config.credentials = { accessKeyId: 'offline', secretAccessKey: 'offline' }
