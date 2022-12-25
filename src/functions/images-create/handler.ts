@@ -6,6 +6,7 @@ import schema from './schema'
 
 const handler: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async event => {
   // TODO Add input validation using zod or @middy/validator
+  // TODO Create image in the database
   const { filename } = event.body
   const data = await createUploadUrl(filename)
 

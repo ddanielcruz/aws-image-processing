@@ -28,7 +28,8 @@ const serverlessConfiguration: AWS = {
     },
     s3: {
       images: {
-        name: '${self:custom.bucket}'
+        name: '${self:custom.bucket}',
+        bucketName: '${self:custom.bucket}'
       }
     },
     iam: {

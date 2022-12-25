@@ -4,11 +4,17 @@ import httpErrorHandler from '@middy/http-error-handler'
 import httpCors from '@middy/http-cors'
 import inputOutputLogger from '@middy/input-output-logger'
 
-const middleware = [jsonBodyParser(), httpErrorHandler(), httpCors()]
-if (process.env.NODE_ENV !== 'test') {
-  middleware.push(inputOutputLogger())
-}
+type EventSource = 'API Gateway' | 'S3'
 
-export const middyfy = (handler: any) => {
-  return middy(handler).use(middleware)
+export const middyfy = (handler: any, event: EventSource = 'API Gateway') => {
+  const transformed = middy(handler)
+  if (event === 'API Gateway') {
+    transformed.use([jsonBodyParser(), httpErrorHandler(), httpCors()])
+  }
+
+  if (process.env.NODE_ENV !== 'test') {
+    transformed.use(inputOutputLogger())
+  }
+
+  return transformed
 }
