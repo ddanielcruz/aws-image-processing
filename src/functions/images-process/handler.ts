@@ -10,11 +10,17 @@ const handler: S3Handler = async event => {
     // TODO Update images' status in the database
     await Promise.all(
       event.Records.map(async rec => {
+        // Create sharp object to do a very simple optimization
+        const optimized = sharp().toFormat('webp')
+
+        // Get image uploaded to the bucket and pipe to sharp object
         const { key } = rec.s3.object
         const image = await s3.getObject({ Bucket, Key: key })
-        const optimized = await sharp(image.Body).toFormat('webp').toBuffer()
+        image.Body.pipe(optimized)
+
+        // Put optimized image on S3
         await s3.putObject({
-          Body: optimized,
+          Body: await optimized.toBuffer(),
           Bucket,
           ContentType: 'image/webp',
           Key: `optimized/${basename(key, extname(key))}.webp`
