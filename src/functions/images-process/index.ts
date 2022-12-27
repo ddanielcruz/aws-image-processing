@@ -6,8 +6,7 @@ export default {
     s3: {
       bucket: 'images',
       event: 's3:ObjectCreated:*',
-      rules: [{ prefix: 'uploads/' }, { suffix }],
-      existing: true
+      rules: [{ prefix: 'uploads/' }, { suffix }]
     }
   }))
 }

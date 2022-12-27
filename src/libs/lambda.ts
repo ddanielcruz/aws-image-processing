@@ -9,11 +9,7 @@ type EventSource = 'API Gateway' | 'S3'
 export const middyfy = (handler: any, event: EventSource = 'API Gateway') => {
   const transformed = middy(handler)
   if (event === 'API Gateway') {
-    transformed.use([jsonBodyParser(), httpErrorHandler(), httpCors()])
-  }
-
-  if (process.env.NODE_ENV !== 'test') {
-    transformed.use(inputOutputLogger())
+    transformed.use([jsonBodyParser(), httpErrorHandler(), httpCors(), inputOutputLogger()])
   }
 
   return transformed
