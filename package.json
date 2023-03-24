@@ -22,7 +22,7 @@
     "@middy/http-json-body-parser": "^4.0.0",
     "@middy/input-output-logger": "^4.0.7",
     "env-var": "^7.3.0",
-    "sharp": "^0.31.3"
+    "sharp": "^0.32.0"
   },
   "devDependencies": {
     "@serverless/typescript": "^3.0.0",
